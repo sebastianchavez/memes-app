@@ -15,10 +15,11 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: '#0984E3',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%'
     },
     btnText: {
         fontSize: 20,
-        color:'#DFE6E9'
+        color:'#DFE6E9',
     }
 })

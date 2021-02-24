@@ -2,9 +2,9 @@ import React from 'react'
 import { Text, View, TouchableOpacity, Image, StyleSheet} from 'react-native'
 import fbIcon from '../assets/icons/facebook.png'
 
-export default () => {
+export default ({onPress}) => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
                 <Text>
                     <View style={styles.iconContainer}>
                         <Image style={styles.icon} source={fbIcon}/>

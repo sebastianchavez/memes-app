@@ -1,44 +1,69 @@
+/******* Dependencies *******/
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
-import LoginPage from './pages/Login'
-import RegisterPage from './pages/Register'
-import HomePage from './pages/Home'
+import { createDrawerNavigator } from 'react-navigation-drawer'
+import { Feather } from '@expo/vector-icons'
+
+/******* Screens *******/
+import { Login, Register, Home, MyPosts, MyProfile } from './screens'
+
+/******* Components *******/
+import { SideBar } from './components'
+
+import { ChangePassword, Post, NewPost } from './modals'
 
 const OnBoardingNavigator = createStackNavigator({
-  Login: LoginPage,
-  Register: RegisterPage
+  Login,
+  Register
 }, {
   headerMode: 'none',
-  initialRouteName: 'Login'
+  initialRouteName: 'Login',
 })
 
-
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: HomePage,
+const DrawerNavigator = createDrawerNavigator({
+  MyProfile: {
+    screen: MyProfile,
     navigationOptions: {
-      title: 'Nombre de la app',
-      headerTintColor: 'white',
-      headerTransparent: true,
-      headerShown: true
+      title: 'Mi perfil',
+      drawerIcon: ({tintColor}) => <Feather name='user' size={16} color={tintColor} />
+    }
+  },
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      title: 'Inicio',
+      drawerIcon: ({tintColor}) => <Feather name='home' size={16} color={tintColor} />
+    }
+  },
+  MyPosts: {
+    screen: MyPosts,
+    navigationOptions: {
+      title: 'Mis publicaciones',
+      drawerIcon: ({tintColor}) => <Feather name='image' size={16} color={tintColor} />
     }
   }
-}, {
-  initialRouteName: 'Home'
+},{
+  contentComponent: props => <SideBar {...props} />
 })
 
 const RootStack = createStackNavigator({
-  Main: AppNavigator,
-},{
-  headerMode: 'none'
+  DrawerNavigator,
+  Post,
+  NewPost,
+  ChangePassword
+}, {
+  headerMode: 'none',
+  initialRouteName: 'DrawerNavigator',
+  mode: 'modal'
 })
 
 const BaseStack = createSwitchNavigator({
   OnBoarding: OnBoardingNavigator,
-  Root: RootStack
+  Root:RootStack
 }, {
   initialRouteName: 'OnBoarding',
 })
+
 
 export default createAppContainer(BaseStack)

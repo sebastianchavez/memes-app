@@ -1,22 +1,21 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
-import bgImage from '../assets/images/test.jpg'
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import optionsIcon from '../assets/icons/ellipsis.png'
 
-export default () => {
+export default ({onPress, title, image}) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.headerText}>
-                    <Text style={styles.headerText}>Header</Text>
+                    <Text style={styles.headerText}>{title}</Text>
                 </View>
-                <View style={styles.iconContainer}>
+                <TouchableOpacity style={styles.iconContainer}>
                     <Image style={styles.icon} source={optionsIcon} />
-                </View>
+                </TouchableOpacity>
             </View>
-            <View style={styles.body}>
-                <Image style={styles.image} source={bgImage}/>
-            </View>
+            <TouchableOpacity style={styles.body} onPress={onPress}>
+                <Image style={styles.image} source={image}/>
+            </TouchableOpacity>
         </View>
     )
 }
